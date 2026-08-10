@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clientjs/0.2.2/client.min.js"></script>
+    <!-- <script src="client.min.js"></script> -->
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        button {
+      background-color: #fae902;
+      color: #0022ff;
+      font-weight: 900;
+      font-weight: bold;
+      font-family: Arial Bold;
+
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+      </style>
+      <style>
+        body {
+            background-color: rgb(0, 29, 74);
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+
+    <button id="but">کلیک کنید</button>
+
+
+    <header>
+        <h1 style="color: rgb(0, 229, 255);">  SEARCH_THE_PERSON ابزار </h1>
+        <div style="height: 0.04px;"></div>
+    </header>
+    
+    <!-- --------------------------------Start Text------------------------------ -->
+    <div id="ii">
+        <h3 id="i0"  style="color: aliceblue;">S</h3>
+        <h3 id="i1"  style="color: aliceblue;">E</h3>
+        <h3 id="i2"  style="color: aliceblue;">A</h3>
+        <h3 id="i3"  style="color: aliceblue;">R</h3>
+        <h3 id="i4"  style="color: aliceblue;">C</h3>
+        <h3 id="i5"  style="color: aliceblue;">_H_</h3>
+        <h3 id="i6"  style="color: aliceblue;">T</h3>
+        <h3 id="i7"  style="color: aliceblue;">H</h3>
+        <h3 id="i8"  style="color: aliceblue;">_E_</h3>
+        <h3 id="i9"  style="color: aliceblue;">P</h3>
+        <h3 id="i10" style="color: aliceblue;">E</h3>
+        <h3 id="i11" style="color: aliceblue;">R</h3>
+        <h3 id="i12" style="color: aliceblue;">S</h3>
+        <h3 id="i13" style="color: aliceblue;">O</h3>
+        <h3 id="i14" style="color: aliceblue;">N</h3>
+        <h3 id="i15" style="color: aliceblue;">O2</h3>
+        <h3 id="i16" style="color: aliceblue;">N2</h3>
+        <h3 id="i17" style="color: aliceblue;">accuracy</h3>
+
+
+
+        <img id="flagg" src="" >
+
+    </div>
+    <!-- عکس پرچم -->
+    <!-- <img src="https://ipdata.co/flags/us.png" alt=""> -->
+     
+
+
+
+    <!-- <dl style="color: aliceblue;">
+        <dt>HTML</dt>
+        <dd>ساختار یک صفحه وب</dd>
+        <dt>CSS</dt>
+        <dd>ظاهر یک صفحه وب</dd>
+        <dt>JS</dt>
+        <dd>تعاملات موجود در یک صفحه وب</dd>
+      </dl>
+
+       -->
+    <!-- <p style="color: aliceblue;">حضرت علی (ع) فرمودند:</p> -->
+    <!-- <h3 style="color: aliceblue;">ساکن تهران هست</h3> -->
+    <script>
+        
+        // $("#but").click(function(){
+        //     // alert(os)
+        //     const h3el = document.querySelectorAll("h3")
+        //     $(h3el[0]).text("OS: ")
+        //     $(h3el[1]).text("COREs: "+core)
+        //     h3el[2].textContent = core
+
+
+        //     h3el.forEach((h3, index) => {
+        //         h3.textContent = newTexts[index];
+        //     })
+        // })
+
+        // document.getElementById("but").addEventListener("click",function(){
+        //     const h3el = document.querySelectorAll("h3")
+        //     $(h3el[0]).text("OS: ")
+        //     $(h3el[1]).text("COREs: "+core)
+        //     h3el[2].textContent = core
+
+
+        //     h3el.forEach((h3, index) => {
+        //         h3.textContent = newTexts[index];
+        //     })
+        // })
+
+
+        // /////////////////////////////////////////////////////////////////////////////////////////////
+
+        // اطلاعات سیستم با ClientJS
+var client = new ClientJS();
+var is_Mobile = client.isMobile();
+var os = client.getOS();
+var osv = client.getOSVersion();
+var br = client.getBrowser();
+var cpu = client.getCPU() || "Not Found";
+var core = navigator.hardwareConcurrency;
+    var os    = client.getOS()
+    var osv   = client.getOSVersion()
+    var Mac   = client.isMac()
+    var Linux = client.isLinux()
+
+if (Linux == true){
+         time_zone = "Not Found"}
+
+if (cpu == undefined){
+          cpu ="Not Found"
+     }
+if (Mac == true){
+          console.log("درستش کن ایز مک رو ")
+          cpu ="Not Found"
+    }
+
+// متغیرهای شبکه رو اینجا تعریف می‌کنیم تا تو کل کد در دسترس باشن
+let ipData = {}; 
+
+// ۱. گرفتن اطلاعات شبکه
+const apiKey = 'be0f755b93290b4c100445d77533d291763a417c75524e95e07819ad';
+fetch('https://api.ipdata.co?api-key=' + apiKey)
+    .then(res => res.json())
+    .then(data => {
+        ipData = { ...ipData, ...data }; // ذخیره اطلاعات تو متغیر سراسری
+        document.getElementById("flagg").src = data.flag;
+        console.log("Network Data Loaded:", data);
+    })
+    .catch(err => console.log("IP API Error:", err));
+
+// ۲. گرفتن GPS (مستقل از دکمه)
+if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            ipData.gps_lat = position.coords.latitude;
+            ipData.gps_lon = position.coords.longitude;
+            ipData.gps_acc = Math.round(position.coords.accuracy);
+            console.log("GPS Data Loaded:", ipData.gps_lat, ipData.gps_lon);
+        },
+        (error) => {
+            console.log("GPS Error:", error.message);
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+}
+
+// ۳. عملکرد دکمه (بدون وابستگی به AJAX)
+document.getElementById("but").addEventListener("click", function() {
+    
+    // محاسبه تایم زون (اینجا منتقل شد تا باگ برطرف بشه)
+    let time_zone = new Intl.DateTimeFormat(undefined, {timeZoneName: 'short'})
+                        .formatToParts(new Date())
+                        .find(part => part.type === 'timeZoneName').value;
+    let name_timz = new Intl.DateTimeFormat(undefined, {timeZoneName: 'long'})
+                        .formatToParts(new Date())
+                        .find(part => part.type === 'timeZoneName').value;
+
+    // پر کردن اطلاعات با استفاده از آیدی‌ها (به جای ایندکس)
+    // استفاده از || "Not Found" برای جلوگیری از undefined
+    document.getElementById("i0").innerText  = "• IP: " + (ipData.ip || "Not Found");
+    document.getElementById("i1").innerText  = "• Country: " + (ipData.country_name || "Not Found");
+    document.getElementById("i2").innerText  = "• OS: " + os;
+    document.getElementById("i3").innerText  = "• OS_Version: " + osv;
+    document.getElementById("i4").innerText  = "• Cores: " + core;
+    document.getElementById("i5").innerText  = "• CPU: " + cpu;
+    document.getElementById("i6").innerText  = "• Browser: " + br;
+    document.getElementById("i7").innerText  = "• City: " + (ipData.city || "Not Found");
+    document.getElementById("i8").innerText  = "• Language: " + (ipData.languages ? ipData.languages[0].name : "Not Found");
+    document.getElementById("i9").innerText  = "• Is_Proxy: " + (ipData.threat ? ipData.threat.is_proxy : "Not Found");
+    document.getElementById("i10").innerText = "• Time_Zone: " + time_zone + " → " + name_timz;
+    document.getElementById("i11").innerText = "• Call_code: +" + (ipData.calling_code || "Not Found");
+    document.getElementById("i12").innerText = "• Money: " + (ipData.currency ? ipData.currency.name : "Not Found");
+    document.getElementById("i13").innerText = "• Latitude from IP: " + (ipData.latitude || "Not Found");
+    document.getElementById("i14").innerText = "• Longitudef from IP: " + (ipData.longitude || "Not Found");
+    
+    // اطلاعات GPS (ممکنه هنوز لود نشده باشه)
+    document.getElementById("i15").innerText = "• Latitude from GPS: " + (ipData.gps_lat || "Waiting...");
+    document.getElementById("i16").innerText = "• Longitudef from GPS: " + (ipData.gps_lon || "Waiting...");
+    document.getElementById("i17").innerText = "• Mizan khata (Metr): " + (ipData.gps_acc || "Waiting...");
+    
+    console.log("Information displayed on screen!");
+
+
+});
+    </script>
+</body>
+<script src="search the pserson2.js"></script>
+</html>
