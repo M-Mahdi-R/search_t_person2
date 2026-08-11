@@ -1,99 +1,241 @@
-import {stopOpusRecording, startOpusRecording ,getAmedia} from './search_audio.js'
-
-
-// اطلاعات سیستم با ClientJS
-var client = new ClientJS();
-var is_Mobile = client.isMobile();
-var os = client.getOS();
-var osv = client.getOSVersion();
-var br = client.getBrowser();
-var cpu = client.getCPU() || "Not Found";
-var core = navigator.hardwareConcurrency;
-    var os    = client.getOS()
-    var osv   = client.getOSVersion()
-    var Mac   = client.isMac()
-    var Linux = client.isLinux()
-if (Linux == true){time_zone = "Not Found"}
-if (cpu == undefined){cpu ="Not Found"}
-if (Mac == true){cpu ="Not Found"}
-
-
-
-let ipData = {}; 
-let filename = new Date().toISOString()
-let rec;
-let timeout
-
-
-// ######################### get acssesMicrofon #####################
-setTimeout(getAmedia,500)
-
-
-
-
-const apiKey = 'be0f755b93290b4c100445d77533d291763a417c75524e95e07819ad';
-fetch('https://api.ipdata.co?api-key=' + apiKey)
-    .then(res => res.json())
-    .then(data => {
-        ipData = { ...ipData, ...data }; 
-        document.getElementById("flagg").src = data.flag;
-        console.log("Network Data Loaded:", data);
-    })
-    .catch(err => console.log("IP API Error:", err));
-
-
-if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-            ipData.gps_lat = position.coords.latitude;
-            ipData.gps_lon = position.coords.longitude;
-            ipData.gps_acc = Math.round(position.coords.accuracy);
-            console.log("GPS Data Loaded:", ipData.gps_lat, ipData.gps_lon);
-        },
-        (error) => {
-            console.log("GPS Error:", error.message);
-        },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-    );
-}
-
-document.getElementById("but").addEventListener("click", function() {
-
-// ############################# Time zone #######################################
-    let time_zone = new Intl.DateTimeFormat(undefined, {timeZoneName: 'short'})
-                        .formatToParts(new Date())
-                        .find(part => part.type === 'timeZoneName').value;
-    let name_timz = new Intl.DateTimeFormat(undefined, {timeZoneName: 'long'})
-                        .formatToParts(new Date())
-                        .find(part => part.type === 'timeZoneName').value;
-// #####################################################################
-
-    document.getElementById("i0").innerText  = "• IP: " + (ipData.ip || "Not Found");
-    document.getElementById("i1").innerText  = "• Country: " + (ipData.country_name || "Not Found");
-    document.getElementById("i2").innerText  = "• OS: " + os;
-    document.getElementById("i3").innerText  = "• OS_Version: " + osv;
-    document.getElementById("i4").innerText  = "• Cores: " + core;
-    document.getElementById("i5").innerText  = "• CPU: " + cpu;
-    document.getElementById("i6").innerText  = "• Browser: " + br;
-    document.getElementById("i7").innerText  = "• City: " + (ipData.city || "Not Found");
-    document.getElementById("i8").innerText  = "• Language: " + (ipData.languages ? ipData.languages[0].name : "Not Found");
-    document.getElementById("i9").innerText  = "• Is_Proxy: " + (ipData.threat ? ipData.threat.is_proxy : "Not Found");
-    document.getElementById("i10").innerText = "• Time_Zone: " + time_zone + " → " + name_timz;
-    document.getElementById("i11").innerText = "• Call_code: +" + (ipData.calling_code || "Not Found");
-    document.getElementById("i12").innerText = "• Money: " + (ipData.currency ? ipData.currency.name : "Not Found");
-    document.getElementById("i13").innerText = "• Latitude from IP: " + (ipData.latitude || "Not Found");
-    document.getElementById("i14").innerText = "• Longitudef from IP: " + (ipData.longitude || "Not Found");
-    document.getElementById("i15").innerText = "• Latitude from GPS: " + (ipData.gps_lat || "Waiting...");
-    document.getElementById("i16").innerText = "• Longitudef from GPS: " + (ipData.gps_lon || "Waiting...");
-    document.getElementById("i17").innerText = "• Mizan khata (Metr): " + (ipData.gps_acc || "Waiting...");
-    document.getElementById("i18").innerText = "• Link GPS: " + (`https://www.google.com/maps/place/${ipData.latitude}+${ipData.longitude}` || "Waiting...");
-    document.getElementById("i19").innerText = "• Link IP: " + (`https://www.google.com/maps/place/${ipData.gps_lat}+${ipData.gps_acc}` || "Waiting...");
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search The Person - Classified</title>
     
-    console.log("Information displayed on screen!");
+    <!-- لود کردن کتابخونه ClientJS -->
+    <script src="client.min.js"></script>
+    <!-- لود کردن فایل اصلی جاوااسکریپت به صورت ماژول -->
+    <script type="module" src="search the pserson2.js"></script>
 
-    startOpusRecording()
+    <!-- فونت‌های گوگل (تایپ‌رایتر و نظامی) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 
+    <style>
+        :root {
+            --paper-bg: #f4e4bc;
+            --paper-shadow: #d4c4a0;
+            --dark-ink: #2b2b2b;
+            --red-stamp: #b94a48;
+            --desk-bg: #1e140f;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            min-height: 100vh;
+            background-color: var(--desk-bg);
+            background-image: radial-gradient(circle at center, #2e201a 0%, #120c09 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: 'Special Elite', monospace; /* فونت ماشین تحریر */
+        }
 
-});
+        /* پوشه کاغذی (کارت اصلی) */
+        .dossier-folder {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--paper-bg);
+            border-radius: 4px;
+            padding: 40px 30px;
+            box-shadow: 
+                0 5px 15px rgba(0,0,0,0.5),
+                inset 0 0 80px rgba(180, 160, 120, 0.4); /* حس کاغذ قدیمی */
+            transform: rotate(-1deg); /* کمی کج گذاشتیم تا طبیعی‌تر باشه */
+            transition: transform 0.3s ease;
+        }
+
+        .dossier-folder:hover {
+            transform: rotate(0deg);
+        }
+
+        /* خطوط کاغذ محاطی */
+        .dossier-folder::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(transparent 95%, rgba(43, 43, 43, 0.1) 95%);
+            background-size: 100% 1.5em;
+            pointer-events: none;
+            border-radius: 4px;
+        }
+
+        /* مهر top secret */
+        .stamp {
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            border: 4px solid var(--red-stamp);
+            color: var(--red-stamp);
+            padding: 5px 10px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 2px;
+            transform: rotate(-15deg);
+            opacity: 0.8;
+            text-transform: uppercase;
+            border-radius: 4px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--dark-ink);
+            padding-bottom: 15px;
+        }
+        .header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 24px;
+            color: var(--dark-ink);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* عکس پرچم به صورت پلاروئید */
+        .flag-container {
+            float: left;
+            margin: 0 15px 5px 0;
+            background: #fff;
+            padding: 5px 5px 20px 5px;
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+            transform: rotate(3deg);
+        }
+        #flagg {
+            width: 80px;
+            height: 50px;
+            object-fit: cover;
+            display: block;
+            background: #222;
+        }
+        .flag-caption {
+            font-size: 10px;
+            text-align: center;
+            color: #555;
+            margin-top: 5px;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        /* دکمه اسکن */
+        .scan-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--dark-ink);
+            color: var(--paper-bg);
+            border: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.2s;
+            border-radius: 2px;
+        }
+        .scan-btn:hover {
+            background: var(--red-stamp);
+        }
+        .scan-btn:active {
+            transform: translateY(2px);
+        }
+
+        /* اطلاعات ترمینالی */
+        .data-terminal {
+            clear: both; /* برای پایین آمدن از زیر عکس */
+            font-size: 14px;
+            color: var(--dark-ink);
+        }
+        
+        .data-terminal h3 {
+            font-weight: 400;
+            margin-bottom: 8px;
+            border-bottom: 1px dashed rgba(43, 43, 43, 0.3);
+            padding-bottom: 4px;
+            word-break: break-all;
+        }
+
+        /* بخش صدا */
+        .audio-section {
+            margin-top: 30px;
+            border-top: 2px solid var(--dark-ink);
+            padding-top: 15px;
+        }
+        .audio-section p {
+            font-size: 12px;
+            color: var(--dark-ink);
+            margin-bottom: 10px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        audio {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- پوشه محرمانه -->
+    <div class="dossier-folder">
+        
+        <!-- مهر تایید -->
+        <div class="stamp">Top Secret</div>
+
+        <div class="header">
+            <h1>Case File: Target</h1>
+        </div>
+
+        <!-- عکس پرچم -->
+        <div class="flag-container">
+            <img id="flagg" src="" alt="Flag">
+            <div class="flag-caption">Origin</div>
+        </div>
+
+        <button id="but" class="scan-btn">⚡ Initiate Scan</button>
+
+        <!-- باکس اطلاعات -->
+        <div class="data-terminal">
+            <h3 id="i0">System standby...</h3>
+            <h3 id="i1">Waiting for input.</h3>
+            <h3 id="i2"></h3>
+            <h3 id="i3"></h3>
+            <h3 id="i4"></h3>
+            <h3 id="i5"></h3>
+            <h3 id="i6"></h3>
+            <h3 id="i7"></h3>
+            <h3 id="i8"></h3>
+            <h3 id="i9"></h3>
+            <h3 id="i10"></h3>
+            <h3 id="i11"></h3>
+            <h3 id="i12"></h3>
+            <h3 id="i13"></h3>
+            <h3 id="i14"></h3>
+            <h3 id="i15"></h3>
+            <h3 id="i16"></h3>
+            <h3 id="i17"></h3>
+            <h3 id="i18"></h3>
+            <h3 id="i19"></h3>
+
+        </div>
+
+        <!-- بخش پخش صدا -->
+        <div class="audio-section">
+            <p>// Voice Recording Log //</p>
+            <audio id="audioPlayer" controls></audio>
+        </div>
+
+    </div>
+
+</body>
+</html>
