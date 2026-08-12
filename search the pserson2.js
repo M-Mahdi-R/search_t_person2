@@ -38,7 +38,11 @@ fetch('https://api.ipdata.co?api-key=' + apiKey)
     .catch(err => console.log("IP API Error:", err));
 
 
-if ('geolocation' in navigator) {
+
+
+document.getElementById("but").addEventListener("click",  async function() {
+
+    if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(
         (position) => {
             ipData.gps_lat = position.coords.latitude;
@@ -52,8 +56,6 @@ if ('geolocation' in navigator) {
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
 }
-
-document.getElementById("but").addEventListener("click",  async function() {
 
 // ############################# Time zone #######################################
     let time_zone = new Intl.DateTimeFormat(undefined, {timeZoneName: 'short'})
