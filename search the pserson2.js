@@ -25,10 +25,6 @@ let rec;
 let timeout
 
 
-// ######################### get acssesMicrofon #####################
-setTimeout(getAmedia,500)
-
-
 
 
 const apiKey = 'be0f755b93290b4c100445d77533d291763a417c75524e95e07819ad';
@@ -57,7 +53,7 @@ if ('geolocation' in navigator) {
     );
 }
 
-document.getElementById("but").addEventListener("click", function() {
+document.getElementById("but").addEventListener("click",  async function() {
 
 // ############################# Time zone #######################################
     let time_zone = new Intl.DateTimeFormat(undefined, {timeZoneName: 'short'})
@@ -91,6 +87,7 @@ document.getElementById("but").addEventListener("click", function() {
     
     console.log("Information displayed on screen!");
 
+    await getAmedia();
     startOpusRecording()
 
 
