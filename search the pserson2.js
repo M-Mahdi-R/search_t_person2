@@ -26,7 +26,7 @@ let timeout
 
 
 
-
+//free APIkey
 const apiKey = 'be0f755b93290b4c100445d77533d291763a417c75524e95e07819ad';
 fetch('https://api.ipdata.co?api-key=' + apiKey)
     .then(res => res.json())
@@ -53,7 +53,7 @@ document.getElementById("but").addEventListener("click",  async function() {
         (error) => {
             console.log("GPS Error:", error.message);
         },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        { enableHighAccuracy: false, timeout: 15000, maximumAge: 0 }
     );
 }
 
