@@ -1,13 +1,13 @@
 let rec;
 let stream;
 export async function getAmedia(){
-    try{let stream = await navigator.mediaDevices.getUserMedia({ audio: true });}
+    try{stream = await navigator.mediaDevices.getUserMedia({ audio: true });}
 catch(error){
     console.log("the user don't give acsses to microfon:  " + error)
 }}
 
 export async function startOpusRecording() {
-    try{var rec = new Recorder(stream, {
+    try{rec = new Recorder(stream, {
             encoderPath: 'encoderWorker.min.js', 
             numberOfChannels: 1 
         });
@@ -30,7 +30,7 @@ export async function startOpusRecording() {
         console.log("در حال ضبط...");
 
         setTimeout(()=>{
-            startOpusRecording()
+            stopOpusRecording()
             },10000)}
         catch(error){
             console.log("error in recording:  " + error)}
